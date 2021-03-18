@@ -49,7 +49,7 @@ MainTab:CreateDropDown('Rebirth Select', {'Rebirth Fire', 'Rebirth Earth', 'Rebi
     _G.RebirthSelected = rebirtht 
 end) 
 
-MainTab:CreateToggle('Auto Farm Diamonds', function(t)
+--[[MainTab:CreateToggle('Auto Farm Diamonds', function(t)
 if t then 
 _G.Farm1 = true
 while true do 
@@ -57,7 +57,7 @@ if _G.Farm1 then
 for i,v in pairs(game.Workspace.Storage.Diamonds:GetChildren()) do 
     if v.Transparency ~= 1 then 
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame 
-        wait(5)
+        wait(5.5)
     end 
 end 
 end
@@ -65,7 +65,7 @@ end
 else 
 _G.Farm1 = false 
 end
-end)
+end)]]
 
 EggTab:CreateToggle('Auto Hatch', function(hatch)
     if hatch then
@@ -100,4 +100,27 @@ MiscTab:CreateButton('Redeem Codes', function()
 for i,v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do 
     game.ReplicatedStorage.Main.Remotes.CodeActivated:InvokeServer(v.Name)
 end 
+end)
+
+local Chests = {} 
+
+for i,v in pairs(game.Workspace.Chests:GetChildren()) do 
+    table.insert(Chests, v.Name)
+end 
+
+MiscTab:CreateToggle('Auto Collect Chests', function(t)
+if t then 
+_G.Chests = true 
+while wait() do
+if _G.Chests then
+for i,v in pairs(Chests) do 
+    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Chests[v].BillboardPart.TouchPart, 0)
+    wait()
+    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Chests[v].BillboardPart.TouchPart, 0)
+end
+end 
+end
+else 
+_G.Chests = false
+end
 end)
