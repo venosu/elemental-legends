@@ -49,10 +49,22 @@ MainTab:CreateDropDown('Rebirth Select', {'Rebirth Fire', 'Rebirth Earth', 'Rebi
     _G.RebirthSelected = rebirtht 
 end) 
 
-MainTab:CreateButton('Collect All Coins', function()
-for i,v in pairs(game.Workspace.Storage.Coins:GetChildren()) do 
-    v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+MainTab:CreateToggle('Auto Farm Diamonds', function(t)
+if t then 
+_G.Farm1 = true
+while true do 
+if _G.Farm1 then
+for i,v in pairs(game.Workspace.Storage.Diamonds:GetChildren()) do 
+    if v.Transparency ~= 1 then 
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame 
+        wait(5)
+    end 
 end 
+end
+end
+else 
+_G.Farm1 = false 
+end
 end)
 
 EggTab:CreateToggle('Auto Hatch', function(hatch)
